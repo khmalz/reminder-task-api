@@ -3,15 +3,22 @@ import prisma from "../lib/prisma";
 interface TaskInput {
    title: string;
    completed?: boolean;
+   categoryKindId: string;
+   categoryTypeId: string;
+   categoryCollectId: string;
 }
 
 export const TaskService = {
    async create(data: TaskInput, userId: string) {
+      const { categoryKindId, categoryTypeId, categoryCollectId, ...rest } = data;
+
       return prisma.task.create({
          data: {
-            title: data.title,
-            completed: data.completed || false,
+            ...rest,
             userId: userId,
+            categoryKindId,
+            categoryTypeId,
+            categoryCollectId,
          },
       });
    },
@@ -20,6 +27,11 @@ export const TaskService = {
       return prisma.task.findMany({
          where: { userId },
          orderBy: { createdAt: "desc" },
+         include: {
+            categoryKind: true,
+            categoryType: true,
+            categoryCollect: true,
+         },
       });
    },
 

@@ -11,14 +11,16 @@ datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
-model User {
-  id       String @id @default(cuid())
-  email    String @unique
-  name     String
-  password String 
-  tasks    Task[] 
 
-  @@map("users") 
+model User {
+  id         String     @id @default(cuid())
+  email      String     @unique
+  name       String
+  password   String
+  categories Category[]
+  tasks      Task[]
+
+  @@map("users")
 }
 
 model Task {
@@ -26,8 +28,47 @@ model Task {
   title     String
   completed Boolean  @default(false)
   createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
 
-  @@map("tasks") 
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  categoryKind   Category @relation("kind", fields: [categoryKindId], references: [id])
+  categoryKindId String
+
+  categoryType   Category @relation("type", fields: [categoryTypeId], references: [id])
+  categoryTypeId String
+
+  categoryCollect   Category @relation("collect", fields: [categoryCollectId], references: [id])
+  categoryCollectId String
+
+  @@index([userId])
+  @@index([categoryKindId])
+  @@index([categoryTypeId])
+  @@index([categoryCollectId])
+  @@map("tasks")
+}
+
+model CategoryType {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  categories Category[]
+
+  @@map("category_types")
+}
+
+model Category {
+  id    String @id @default(cuid())
+  title String
+
+  type   CategoryType @relation(fields: [typeId], references: [id])
+  typeId Int
+
+  tasksKind    Task[]  @relation("kind")
+  tasksType    Task[]  @relation("type")
+  tasksCollect Task[]  @relation("collect")
+  user         User?   @relation(fields: [userId], references: [id])
+  userId       String?
+
+  @@map("categories")
 }

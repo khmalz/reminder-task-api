@@ -1,0 +1,65 @@
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhnbG5zYzcwMDAwdDJma3B1cTJ2Y294IiwiZW1haWwiOiJjb2JhLWVseXNpYUBnbWFpbC5jb20iLCJpYXQiOjE3NjIwMjA3NTIsImV4cCI6MTc2MjEwNzE1Mn0.aY2rliKuEhFLBChZIM3rp2ygssltrKlzfAS_Y6StTQg
+@hostname = http://localhost:3000
+
+###
+GET {{hostname}}/category?type=TASK_KIND
+Authorization: Bearer {{authToken}}
+
+###
+POST {{hostname}}/category?type=TASK_TYPE
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Solo Work"
+}
+
+###
+GET {{hostname}}/category?type=TASK_TYPE
+Authorization: Bearer {{authToken}}
+
+###
+POST {{hostname}}/category?type=TASK_COLLECTION
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Zoom Link"
+}
+
+###
+@customCategoryId = cmhi9s67c0000y4uj9u7v7q0v
+
+
+###
+PUT {{hostname}}/category/{{customCategoryId}}
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Independent Project (Diupdate)"
+}
+
+###
+GET {{hostname}}/category?type=TASK_TYPE
+Authorization: Bearer {{authToken}}
+
+###
+DELETE {{hostname}}/category/{{customCategoryId}}
+Authorization: Bearer {{authToken}}
+
+### 
+GET {{hostname}}/category?type=TASK_TYPE
+Authorization: Bearer {{authToken}}
+
+### 
+POST {{hostname}}/category?type=TASK_KIND
+Content-Type: application/json
+
+{
+    "title": "Test Gagal"
+}
+
+### 
+GET {{hostname}}/category?type=SALAH_KETIK
+Authorization: Bearer {{authToken}}
