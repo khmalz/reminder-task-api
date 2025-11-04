@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "api:dev": "pnpm --filter api dev",
+    "api-nest:dev": "pnpm --filter api-nest start:dev",
     "web:dev": "pnpm --filter web dev",
     "prepare": "husky"
   },

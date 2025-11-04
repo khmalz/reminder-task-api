@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String     @id @default(cuid())
+  email      String     @unique
+  name       String
+  password   String
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@map("users")
+}
+
+model Task {
+  id          String     @id @default(cuid())
+  title       String
+  isCompleted Boolean    @default(false)
+  // user        User       @relation(fields: [userId], references: [id])
+  // userId      String
+  categories  Category[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // @@index([userId])
+  @@map("tasks")
+}
+
+model CategoryType {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  categories Category[]
+
+  @@map("category_types")
+}
+
+model Category {
+  id        String       @id @default(cuid())
+  title     String
+  type      CategoryType @relation(fields: [typeId], references: [id])
+  typeId    Int
+  tasks     Task[]
+  // user      User?        @relation(fields: [userId], references: [id])
+  // userId    String?
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@map("categories")
+}
