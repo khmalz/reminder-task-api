@@ -18,7 +18,6 @@ export class CategoryController {
    constructor(private readonly categoryService: CategoryService) {}
 
    @Post()
-   @UseGuards(JwtAuthGuard)
    create(@Body() createCategoryDto: CreateCategoryDto, @GetUser('sub') userId: string) {
       return this.categoryService.create(createCategoryDto, userId);
    }

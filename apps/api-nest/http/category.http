@@ -5,7 +5,7 @@
 GET {{hostname}}/category?type=TASK_KIND
 Authorization: Bearer {{authToken}}
 
-### Buat kategori TASK_TYPE baru (FIXED)
+### Buat kategori TASK_TYPE baru
 POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
@@ -19,7 +19,7 @@ Authorization: Bearer {{authToken}}
 GET {{hostname}}/category?type=TASK_TYPE
 Authorization: Bearer {{authToken}}
 
-### Buat kategori TASK_COLLECTION baru (FIXED)
+### Buat kategori TASK_COLLECTION baru
 POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
@@ -28,6 +28,10 @@ Authorization: Bearer {{authToken}}
     "title": "Zoom Link",
     "categoryTypeName": "TASK_COLLECTION"
 }
+
+### Ambil semua kategori TASK_COLLECTION
+GET {{hostname}}/category?type=TASK_COLLECTION
+Authorization: Bearer {{authToken}}
 
 ### 
 @customCategoryId = cmhl7toig0002t2ekc0r91q11
@@ -54,7 +58,7 @@ Authorization: Bearer {{authToken}}
 GET {{hostname}}/category?type=TASK_TYPE
 Authorization: Bearer {{authToken}}
 
-### Buat kategori TASK_KIND baru (FIXED)
+### Buat kategori TASK_KIND baru
 POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
@@ -62,6 +66,16 @@ Authorization: Bearer {{authToken}}
 { 
     "title": "Individu",
     "categoryTypeName": "TASK_KIND"
+}
+
+### Buat kategori TASK_TYPE baru
+POST {{hostname}}/category
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "Kelompok",
+    "categoryTypeName": "TASK_TYPE"
 }
 
 ### Uji Validasi Error (INI SEHARUSNYA GAGAL)
