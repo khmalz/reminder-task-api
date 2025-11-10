@@ -1,10 +1,10 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhpbm1wem4wMDAwdDJ0MG5na3BzOGw4IiwiZW1haWwiOiJjb2JhLWVseXNpYUBnbWFpbC5jb20iLCJpYXQiOjE3NjIxNDQ5OTYsImV4cCI6MTc2MjIzMTM5Nn0.ZyA4GNGaJvvCi7diPBagsZrYgwn76YniSpfSg6lbGgI
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhsN2w4dHAwMDAwdDJlazZjZTgwbG02IiwiZW1haWwiOiJjb2JhLWVseXNpYUBnbWFpbC5jb20iLCJpYXQiOjE3NjIyOTk0NjgsImV4cCI6MTc2MjM4NTg2OH0._nKr2KO2HRbwSPy2xEglZjmMw3RgNbQCjAjBlSx1BqE
 @hostname = http://localhost:3000
 
-@categoryId_Kind = cmhinrlra0004t2t0c68ae8mj
-@categoryId_Type = cmhinrvcx0006t2t0unmxzoj6
-@categoryId_Collect = cmhinpvnf0002t2t04oy1blv5
-@categoryId_Update = cmhinrvcx0006t2t0unmxzoj6
+@categoryId_Kind = cmhl7u8hh0006t2ek49rvqslw
+@categoryId_Type = cmhlwjuu00005t2q4t444ofgk
+@categoryId_Collect = cmhl7tv7l0004t2ekxdm479ed
+@categoryId_Update = cmhlwidal0003t2q4i7159uc0
 
 POST {{hostname}}/tasks
 Authorization: Bearer {{authToken}}
@@ -27,7 +27,7 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 ###
-@taskId = cmhintcox0008t2t086dxpnhm
+@taskId = cmhlwwpai0001t2p8ktjphk99
 
 GET {{hostname}}/tasks/{{taskId}}
 Authorization: Bearer {{authToken}}

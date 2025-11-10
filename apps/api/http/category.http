@@ -1,37 +1,43 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhpbm1wem4wMDAwdDJ0MG5na3BzOGw4IiwiZW1haWwiOiJjb2JhLWVseXNpYUBnbWFpbC5jb20iLCJpYXQiOjE3NjIxNDQ5OTYsImV4cCI6MTc2MjIzMTM5Nn0.ZyA4GNGaJvvCi7diPBagsZrYgwn76YniSpfSg6lbGgI
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbWhsN2w4dHAwMDAwdDJlazZjZTgwbG02IiwiZW1haWwiOiJjb2JhLWVseXNpYUBnbWFpbC5jb20iLCJpYXQiOjE3NjIyOTk0NjgsImV4cCI6MTc2MjM4NTg2OH0._nKr2KO2HRbwSPy2xEglZjmMw3RgNbQCjAjBlSx1BqE
 @hostname = http://localhost:3000
 
-###
+### Ambil semua kategori TASK_KIND
 GET {{hostname}}/category?type=TASK_KIND
 Authorization: Bearer {{authToken}}
 
-###
-POST {{hostname}}/category?type=TASK_TYPE
+### Buat kategori TASK_TYPE baru
+POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Solo Work"
+    "title": "Solo Work",
+    "categoryTypeName": "TASK_TYPE"
 }
 
-###
+### Ambil semua kategori TASK_TYPE
 GET {{hostname}}/category?type=TASK_TYPE
 Authorization: Bearer {{authToken}}
 
-###
-POST {{hostname}}/category?type=TASK_COLLECTION
+### Buat kategori TASK_COLLECTION baru
+POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Zoom Link"
+    "title": "Zoom Link",
+    "categoryTypeName": "TASK_COLLECTION"
 }
 
-###
-@customCategoryId = cmhi9s67c0000y4uj9u7v7q0v
+### Ambil semua kategori TASK_COLLECTION
+GET {{hostname}}/category?type=TASK_COLLECTION
+Authorization: Bearer {{authToken}}
+
+### 
+@customCategoryId = cmhl7toig0002t2ekc0r91q11
 
 
-###
+### Update kategori custom
 PUT {{hostname}}/category/{{customCategoryId}}
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
@@ -40,27 +46,38 @@ Authorization: Bearer {{authToken}}
     "title": "Independent Project (Diupdate)"
 }
 
-###
+### Ambil TASK_TYPE (untuk melihat hasil update)
 GET {{hostname}}/category?type=TASK_TYPE
 Authorization: Bearer {{authToken}}
 
-###
+### Hapus kategori custom
 DELETE {{hostname}}/category/{{customCategoryId}}
 Authorization: Bearer {{authToken}}
 
-### 
+### Ambil TASK_TYPE (untuk melihat hasil delete)
 GET {{hostname}}/category?type=TASK_TYPE
 Authorization: Bearer {{authToken}}
 
-### 
-POST {{hostname}}/category?type=TASK_KIND
+### Buat kategori TASK_KIND baru
+POST {{hostname}}/category
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{ 
+    "title": "Individu",
+    "categoryTypeName": "TASK_KIND"
+}
+
+### Buat kategori TASK_TYPE baru
+POST {{hostname}}/category
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-    "title": "Individu"
+    "title": "Kelompok",
+    "categoryTypeName": "TASK_TYPE"
 }
 
-### 
+### Uji Validasi Error (INI SEHARUSNYA GAGAL)
 GET {{hostname}}/category?type=SALAH_KETIK
 Authorization: Bearer {{authToken}}

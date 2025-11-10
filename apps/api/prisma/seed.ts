@@ -1,11 +1,12 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '../generated/prisma';
 
 const prisma = new PrismaClient();
 
-const staticCategoryTypes = [{ name: "TASK_KIND" }, { name: "TASK_TYPE" }, { name: "TASK_COLLECTION" }];
+const staticCategoryTypes = [{ name: 'TASK_KIND' }, { name: 'TASK_TYPE' }, { name: 'TASK_COLLECTION' }];
 
 async function main() {
-   console.log("Start seeding static CategoryTypes...");
+   console.log('Start seeding static users data...');
+
    for (const typeData of staticCategoryTypes) {
       const type = await prisma.categoryType.upsert({
          where: { name: typeData.name },
@@ -14,7 +15,8 @@ async function main() {
       });
       console.log(`Created or updated CategoryType with ID: ${type.id} and Name: ${type.name}`);
    }
-   console.log("Seeding finished.");
+
+   console.log('Seeding finished.');
 }
 
 main()
