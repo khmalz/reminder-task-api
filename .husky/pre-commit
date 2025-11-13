@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Running pre-commit hook: Linting affected projects..."
+pnpm --filter "...[main]" run lint --quiet --max-warnings=0
+
+if [ $? -ne 0 ]; then
+  echo "Lint found errors. Commit aborted."
+  exit 1
+fi
+
+echo "Lint passed. Proceeding with commit..."
+echo
+exit 0
