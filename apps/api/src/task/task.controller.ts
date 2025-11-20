@@ -22,31 +22,31 @@ export class TaskController {
 
    @Post()
    @CreateTaskSwagger()
-   create(@Body() createTaskDto: CreateTaskDto, @GetUser('sub') userId: string) {
+   create(@Body() createTaskDto: CreateTaskDto, @GetUser('userid') userId: string) {
       return this.taskService.create(createTaskDto, userId);
    }
 
    @Get()
    @FindAllTasksSwagger()
-   findAll(@GetUser('sub') userId: string) {
+   findAll(@GetUser('userid') userId: string) {
       return this.taskService.findAll(userId);
    }
 
    @Get(':id')
    @FindOneTaskSwagger()
-   findOne(@Param('id') id: string, @GetUser('sub') userId: string) {
+   findOne(@Param('id') id: string, @GetUser('userid') userId: string) {
       return this.taskService.findOne(id, userId);
    }
 
    @Patch(':id')
    @UpdateTaskSwagger()
-   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @GetUser('sub') userId: string) {
+   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto, @GetUser('userid') userId: string) {
       return this.taskService.update(id, userId, updateTaskDto);
    }
 
    @Delete(':id')
    @DeleteTaskSwagger()
-   remove(@Param('id') id: string, @GetUser('sub') userId: string) {
+   remove(@Param('id') id: string, @GetUser('userid') userId: string) {
       return this.taskService.remove(id, userId);
    }
 }

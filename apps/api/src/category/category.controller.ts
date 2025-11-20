@@ -23,25 +23,25 @@ export class CategoryController {
 
    @Post()
    @CreateCategorySwagger()
-   create(@Body() createCategoryDto: CreateCategoryDto, @GetUser('sub') userId: string) {
+   create(@Body() createCategoryDto: CreateCategoryDto, @GetUser('userid') userId: string) {
       return this.categoryService.create(createCategoryDto, userId);
    }
 
    @Get()
    @FindAllCategoriesSwagger()
-   findAll(@Query() query: GetCategoryQueryDto, @GetUser('sub') userId: string) {
+   findAll(@Query() query: GetCategoryQueryDto, @GetUser('userid') userId: string) {
       return this.categoryService.findAll(query.type, userId);
    }
 
    @Put(':id')
    @UpdateCategorySwagger()
-   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto, @GetUser('sub') userId: string) {
+   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto, @GetUser('userid') userId: string) {
       return this.categoryService.update(id, userId, updateCategoryDto);
    }
 
    @Delete(':id')
    @DeleteCategorySwagger()
-   remove(@Param('id') id: string, @GetUser('sub') userId: string) {
+   remove(@Param('id') id: string, @GetUser('userid') userId: string) {
       return this.categoryService.remove(id, userId);
    }
 }
