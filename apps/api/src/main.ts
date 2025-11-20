@@ -30,6 +30,7 @@ Most endpoints require Bearer token authentication. Use the /auth/login endpoint
          },
          'bearer',
       )
+      .addTag('1. Health', 'API health check endpoint')
       .addTag('Authentication', 'User authentication endpoints')
       .addTag('Tasks', 'Task management endpoints')
       .addTag('Categories', 'Category management endpoints')
