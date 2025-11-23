@@ -31,15 +31,18 @@ export default function SigninCard() {
       try {
          if (!formData.fullname || !formData.username || !formData.password || !formData.confirmPassword) {
             throw new Error("Formulir Tidak Boleh Kosong");
+            return
          }
 
          if (formData.password !== formData.confirmPassword) {
             throw new Error("Konfirmasi Password Anda Salah");
+            return
          }
 
          const isUsernameTaken = EXISTING_USERS.find((user) => user.username.toLowerCase() === formData.username)
          if (isUsernameTaken) {
             throw new Error("Username Sudah Digunakan");
+            return
          }
 
          router.push("/dashboard");
