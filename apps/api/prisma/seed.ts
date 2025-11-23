@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const staticCategoryTypes = [{ name: 'TASK_KIND' }, { name: 'TASK_TYPE' }, { name: 'TASK_COLLECTION' }];
 
 async function main() {
-   console.log('Start seeding static users data...');
+   console.log('Start seeding category types...');
 
    for (const typeData of staticCategoryTypes) {
       const type = await prisma.categoryType.upsert({

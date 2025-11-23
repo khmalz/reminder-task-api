@@ -33,6 +33,9 @@ export class AuthService {
          },
       });
 
+      // CATEGORY SEED FOR NEW USER
+      await this.createDefaultCategoriesForUser(newUser.id);
+
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password: _, ...result } = newUser;
       return result;
@@ -55,7 +58,7 @@ export class AuthService {
          throw new UnauthorizedException('Username atau password salah');
       }
 
-      const payload = { sub: user.id, username: user.username };
+      const payload = { userid: user.id, username: user.username };
 
       return {
          access_token: await this.jwtService.signAsync(payload),
@@ -67,5 +70,35 @@ export class AuthService {
       return {
          message: 'Logout berhasil. Pastikan token dihapus di sisi klien.',
       };
+   }
+
+   // HELPER
+   private async createDefaultCategoriesForUser(userId: string) {
+      const defaultCategoriesByType: Record<string, string[]> = {
+         TASK_KIND: ['Makalah', 'PPT'],
+         TASK_TYPE: ['Individu', 'Kelompok'],
+         TASK_COLLECTION: ['Drive', 'LMS'],
+      };
+
+      for (const [typeName, titles] of Object.entries(defaultCategoriesByType)) {
+         const type = await this.prisma.categoryType.findUnique({ where: { name: typeName } });
+         if (!type) continue;
+
+         for (const title of titles) {
+            const exists = await this.prisma.category.findFirst({
+               where: { title, typeId: type.id, userId },
+            });
+
+            if (!exists) {
+               await this.prisma.category.create({
+                  data: {
+                     title,
+                     typeId: type.id,
+                     userId,
+                  },
+               });
+            }
+         }
+      }
    }
 }
