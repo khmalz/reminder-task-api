@@ -31,10 +31,12 @@ export default function LoginCard() {
       try {
          if (!formData.username || !formData.password) {
             throw new Error("Username Atau Password Tidak Boleh Kosong!");
+            return
          }
 
          if (formData.username !== DUMMY_DATA.username && formData.password !== DUMMY_DATA.password) {
             throw new Error("Username Atau Password Salah!");
+            return
          }
 
          router.push("/dashboard");
