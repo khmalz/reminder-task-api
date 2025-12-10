@@ -1,4 +1,4 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJjbWk3bzB4em8wMDAwdDI0c3VoM20waWs1IiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNzYzODE2ODE4LCJleHAiOjE3NjM5MDMyMTh9.ZZLm4_01VrForDQFTzeyyx--9IUjLmc8US7NifhlXhc
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJjbWowZnB4Z2cwMDAwdmcwbzlvanN6czlpIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNzY1Mzk2ODk1LCJleHAiOjE3NjU0ODMyOTV9.5MYUZn_-GwldBu-hY4TTvyRvxb2u8WlXvOMIlywxUrU
 @hostname = http://localhost:3000
 
 ### Ambil semua kategori TASK_KIND

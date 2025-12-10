@@ -62,6 +62,10 @@ export class AuthService {
 
       return {
          access_token: await this.jwtService.signAsync(payload),
+         user: {
+            username: user.username,
+            name: user.name,
+         },
       };
    }
 
@@ -81,8 +85,11 @@ export class AuthService {
       };
 
       for (const [typeName, titles] of Object.entries(defaultCategoriesByType)) {
-         const type = await this.prisma.categoryType.findUnique({ where: { name: typeName } });
-         if (!type) continue;
+         const type = await this.prisma.categoryType.upsert({
+            where: { name: typeName },
+            update: {},
+            create: { name: typeName },
+         });
 
          for (const title of titles) {
             const exists = await this.prisma.category.findFirst({

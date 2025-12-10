@@ -1,13 +1,12 @@
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJjbWk3bzB4em8wMDAwdDI0c3VoM20waWs1IiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNzYzODE2ODE4LCJleHAiOjE3NjM5MDMyMTh9.ZZLm4_01VrForDQFTzeyyx--9IUjLmc8US7NifhlXhc
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOiJjbWowZnB4Z2cwMDAwdmcwbzlvanN6czlpIiwidXNlcm5hbWUiOiJ1c2VyIiwiaWF0IjoxNzY1Mzk2ODk1LCJleHAiOjE3NjU0ODMyOTV9.5MYUZn_-GwldBu-hY4TTvyRvxb2u8WlXvOMIlywxUrU
 @hostname = http://localhost:3000
 
 # Makalah
-@categoryId_Kind = cmi7o0y0j0002t24sgxrospbu
+@categoryId_Kind = cmj0fpxhc0002vg0o0xad4q53
 # Individu
-@categoryId_Type = cmi7o0y1k0006t24ss74aby1n
+@categoryId_Type = cmj0fpxi90006vg0o8jk5l0ns
 # Drive
-@categoryId_Collect = cmi7o0y2d000at24s6dxbf6pg
-
+@categoryId_Collect = cmj0fpxj4000avg0ovb1tqzsc
 
 
 @categoryId_Update = cmhylpk2y0001t2xotqf0xc7a

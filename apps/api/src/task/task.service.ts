@@ -10,7 +10,7 @@ export class TaskService {
    async create(dto: CreateTaskDto, userId: string) {
       const { categoryIds, ...rest } = dto;
 
-      return this.prisma.task.create({
+      const task = await this.prisma.task.create({
          data: {
             ...rest,
             userId: userId,
@@ -24,30 +24,64 @@ export class TaskService {
          },
          include: {
             categoryToTasks: {
-               include: {
+               select: {
                   category: {
-                     select: { id: true, title: true, typeId: true },
+                     select: {
+                        id: true,
+                        title: true,
+                        type: {
+                           select: { name: true },
+                        },
+                     },
                   },
                },
             },
          },
       });
+
+      return {
+         ...task,
+         categoryToTasks: task.categoryToTasks.map(ct => ({
+            category: {
+               id: ct.category.id,
+               title: ct.category.title,
+               typeName: ct.category.type.name,
+            },
+         })),
+      };
    }
 
    async findAll(userId: string) {
-      return this.prisma.task.findMany({
+      const tasks = await this.prisma.task.findMany({
          where: { userId },
          orderBy: { createdAt: 'desc' },
          include: {
             categoryToTasks: {
-               include: {
+               select: {
                   category: {
-                     select: { id: true, title: true, typeId: true },
+                     select: {
+                        id: true,
+                        title: true,
+                        type: {
+                           select: { name: true },
+                        },
+                     },
                   },
                },
             },
          },
       });
+
+      return tasks.map(task => ({
+         ...task,
+         categoryToTasks: task.categoryToTasks.map(ct => ({
+            category: {
+               id: ct.category.id,
+               title: ct.category.title,
+               typeName: ct.category.type.name,
+            },
+         })),
+      }));
    }
 
    async findOne(taskId: string, userId: string) {
@@ -55,9 +89,15 @@ export class TaskService {
          where: { id: taskId, userId },
          include: {
             categoryToTasks: {
-               include: {
+               select: {
                   category: {
-                     select: { id: true, title: true, typeId: true },
+                     select: {
+                        id: true,
+                        title: true,
+                        type: {
+                           select: { name: true },
+                        },
+                     },
                   },
                },
             },
@@ -68,7 +108,16 @@ export class TaskService {
          throw new NotFoundException('Tugas tidak ditemukan.');
       }
 
-      return task;
+      return {
+         ...task,
+         categoryToTasks: task.categoryToTasks.map(ct => ({
+            category: {
+               id: ct.category.id,
+               title: ct.category.title,
+               typeName: ct.category.type.name,
+            },
+         })),
+      };
    }
 
    async update(taskId: string, userId: string, dto: UpdateTaskDto) {
@@ -85,7 +134,7 @@ export class TaskService {
             where: { taskId },
          });
 
-         return this.prisma.task.update({
+         const updatedTask = await this.prisma.task.update({
             where: { id: taskId },
             data: {
                ...rest,
@@ -99,29 +148,63 @@ export class TaskService {
             },
             include: {
                categoryToTasks: {
-                  include: {
+                  select: {
                      category: {
-                        select: { id: true, title: true, typeId: true },
+                        select: {
+                           id: true,
+                           title: true,
+                           type: {
+                              select: { name: true },
+                           },
+                        },
                      },
                   },
                },
             },
          });
+
+         return {
+            ...updatedTask,
+            categoryToTasks: updatedTask.categoryToTasks.map(ct => ({
+               category: {
+                  id: ct.category.id,
+                  title: ct.category.title,
+                  typeName: ct.category.type.name,
+               },
+            })),
+         };
       }
 
-      return this.prisma.task.update({
+      const updatedTask = await this.prisma.task.update({
          where: { id: taskId },
          data: rest,
          include: {
             categoryToTasks: {
-               include: {
+               select: {
                   category: {
-                     select: { id: true, title: true, typeId: true },
+                     select: {
+                        id: true,
+                        title: true,
+                        type: {
+                           select: { name: true },
+                        },
+                     },
                   },
                },
             },
          },
       });
+
+      return {
+         ...updatedTask,
+         categoryToTasks: updatedTask.categoryToTasks.map(ct => ({
+            category: {
+               id: ct.category.id,
+               title: ct.category.title,
+               typeName: ct.category.type.name,
+            },
+         })),
+      };
    }
 
    async remove(taskId: string, userId: string) {
