@@ -59,6 +59,7 @@ export function ProfileNavbar() {
 
          // Tetap hapus storage meskipun API gagal/expired (401) demi keamanan
          if (res.ok || res.status === 401) {
+            document.cookie = "token=; path=/; max-age=0";
             localStorage.clear();
             router.push("/login");
             router.refresh();
