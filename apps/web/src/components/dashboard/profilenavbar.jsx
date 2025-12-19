@@ -74,11 +74,11 @@ export function ProfileNavbar() {
    };
 
    return (
-      <div className="flex h-[450px] w-64 flex-col items-center justify-between rounded-2xl border border-slate-200 bg-white px-3 py-8 shadow-sm">
+      <div className="flex h-[450px] w-64 flex-col items-center justify-between rounded-2xl bg-muted px-3 py-8 shadow-sm">
          {/* Tampilan Nama yang Dinamis */}
          <div className="flex w-full flex-col gap-1 overflow-hidden">
-            <h2 className="truncate px-2 text-center text-xl font-bold text-slate-800">Hai, {userInfo.fullName}</h2>
-            <h4 className="truncate text-center text-sm font-medium text-slate-500">{userInfo.userName}</h4>
+            <h2 className="truncate px-2 text-center text-xl font-bold text-primary">Hai, {userInfo.fullName}</h2>
+            <h4 className="truncate text-center text-base font-medium text-primary/70">@{userInfo.userName}</h4>
          </div>
 
          <nav className="flex w-full flex-col gap-2">
@@ -87,31 +87,31 @@ export function ProfileNavbar() {
                const isActive = pathName === item.Path;
 
                return (
-                  <Link key={item.Path} href={item.Path} className={cn("flex w-full items-center gap-3 rounded-xl px-4 py-3 transition-all", isActive ? "bg-blue-50 font-semibold text-blue-600" : "text-slate-600 hover:bg-slate-50")}>
+                  <Link key={item.Path} href={item.Path} className={cn("flex w-full items-center gap-3 rounded-xl px-4 py-3 transition-all", isActive ? "bg-background font-semibold text-primary" : "text-accent hover:bg-primary")}>
                      <Icon size={20} />
                      <span className="text-sm">{item.Label}</span>
                   </Link>
                );
             })}
 
-            <button onClick={() => setLogoutDialogOpen(true)} className="mt-10 flex w-full items-center gap-3 rounded-xl px-4 py-3 font-medium text-red-500 transition-all hover:bg-red-50">
+            <button onClick={() => setLogoutDialogOpen(true)} className="mt-10 cursor-pointer flex w-full items-center gap-3 rounded-xl px-4 py-3 font-medium outline-red-900 outline-2 text-red-900 transition-all hover:bg-red-900 hover:text-accent">
                <LogOut size={20} />
                <span className="text-sm">Keluar</span>
             </button>
          </nav>
 
          {/* Logout Confirmation Dialog */}
-         <Dialog open={isLogoutDialogOpen} onOpenChange={setLogoutDialogOpen}>
-            <DialogContent className="sm:max-w-[400px]">
+         <Dialog open={isLogoutDialogOpen} onOpenChange={setLogoutDialogOpen} >
+            <DialogContent className="sm:max-w-[400px] bg-background">
                <DialogHeader>
-                  <DialogTitle>Konfirmasi Keluar</DialogTitle>
+                  <DialogTitle className={"text-primary"}>Konfirmasi Keluar</DialogTitle>
                   <DialogDescription>Apakah Anda yakin ingin keluar? Sesi Anda akan berakhir.</DialogDescription>
                </DialogHeader>
                <DialogFooter className="flex gap-2 pt-4 sm:gap-0">
-                  <button disabled={isLoading} onClick={() => setLogoutDialogOpen(false)} className="w-full rounded-lg px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 sm:w-auto">
+                  <button disabled={isLoading} onClick={() => setLogoutDialogOpen(false)} className="w-full rounded-lg px-4 py-2 text-sm font-medium text-primary cursor-pointer sm:w-auto">
                      Batal
                   </button>
-                  <button disabled={isLoading} onClick={handleLogout} className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 sm:w-auto">
+                  <button disabled={isLoading} onClick={handleLogout} className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-900 px-4 py-2 text-sm font-medium text-accent cursor-pointer sm:w-auto">
                      {isLoading && <Loader2 size={16} className="animate-spin" />}
                      Keluar Sekarang
                   </button>

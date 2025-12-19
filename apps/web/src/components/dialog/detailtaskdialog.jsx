@@ -28,10 +28,10 @@ const DetailTaskDialog = ({ task, onEdit, onToggle }) => {
          </div>
 
          <div className="flex flex-col gap-3">
-            <button onClick={onEdit} className="rounded-lg bg-slate-700 py-3 font-semibold shadow-lg transition hover:bg-slate-600">
+            <button onClick={onEdit} className="bg-primary cursor-pointer rounded-lg py-3 font-medium shadow-lg transition hover:-translate-y-1">
                Edit Tugas
             </button>
-            <button onClick={onToggle} className="rounded-lg bg-slate-600 py-3 font-semibold shadow-lg transition hover:bg-slate-500">
+            <button onClick={onToggle} className="bg-primary cursor-pointer rounded-lg py-3 font-medium shadow-lg transition hover:-translate-y-1">
                {task.isCompleted ? "Tandai Belum Selesai" : "Tandai Selesai"}
             </button>
          </div>

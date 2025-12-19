@@ -8,17 +8,17 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 export default function LabelsPage() {
    const types = useMemo(
       () => ({
-         jenis: "TASK_KIND",
-         tipe: "TASK_TYPE",
-         pengumpulan: "TASK_COLLECTION",
+         Jenis: "TASK_KIND",
+         Tipe: "TASK_TYPE",
+         Pengumpulan: "TASK_COLLECTION",
       }),
       [],
    );
 
    const [columns, setColumns] = useState({
-      jenis: [],
-      tipe: [],
-      pengumpulan: [],
+      Jenis: [],
+      Tipe: [],
+      Pengumpulan: [],
    });
 
    const [token, setToken] = useState("");
@@ -233,7 +233,10 @@ export default function LabelsPage() {
 
                         <div className="mt-5 flex flex-col gap-3">
                            {columns[colKey].map(item => (
-                              <div key={item.id} onClick={() => handleEditClick(colKey, item)} className="group bg-primary text-accent flex cursor-pointer items-center justify-around rounded-lg px-4 py-3 shadow-md transition-all hover:translate-x-1">
+                              <div
+                                 key={item.id}
+                                 onClick={() => handleEditClick(colKey, item)}
+                                 className="group bg-primary text-accent flex cursor-pointer items-center justify-around rounded-lg px-4 py-3 shadow-md transition-all hover:-translate-y-1">
                                  <div className="flex w-full justify-between text-base font-semibold">
                                     {item.title}
                                     <ChevronRightIcon />

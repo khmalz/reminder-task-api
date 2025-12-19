@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
-const FormTaskDialog = ({ mode, initialData, onSave, onClose, onDelete }) => {
+const FormTaskDialog = ({ mode, initialData, onSave, onDelete }) => {
    const categories = initialData?.categoryToTasks?.reduce(
       (acc, item) => {
          const { id, title, typeName } = item.category;
@@ -39,6 +39,8 @@ const FormTaskDialog = ({ mode, initialData, onSave, onClose, onDelete }) => {
       selectedTipe: categories?.type?.id || "",
       selectedPengumpulan: categories?.method?.id || "",
    });
+
+   const [error, setError] = useState("")
 
    useEffect(() => {
       const fetchAllLabels = async () => {
@@ -89,17 +91,12 @@ const FormTaskDialog = ({ mode, initialData, onSave, onClose, onDelete }) => {
    };
 
    return (
-      <div className="relative w-full max-w-[450px] rounded-[30px] bg-[#7D96A8] p-10 text-white shadow-xl">
-         {/* Tombol Close */}
-         <button onClick={onClose} className="absolute top-6 right-6 text-[#2D3E50] transition-colors hover:text-white">
-            <X size={28} strokeWidth={2.5} />
-         </button>
-
+      <div className="text-accent relative w-full max-w-[450px] rounded-[30px] p-10">
          <h2 className="mb-10 text-center text-3xl font-semibold tracking-wide">{mode === "ADD" ? "Tambah Tugas" : "Edit Tugas"}</h2>
 
          <div className="space-y-5">
             {/* Menggunakan InputGroup yang sudah disesuaikan stylingnya */}
-            <InputGroup label="Mata Kuliah" placeholder="Nama Matkul" value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} />
+            <InputGroup label="Nama Tugas" placeholder="Nama Tugas..." value={formData.title} onChange={e => setFormData({ ...formData, title: e.target.value })} />
 
             {/* Dropdown dinamis berdasarkan labels/page.js */}
             <DropdownRow label="Jenis Tugas" options={options.jenis} value={formData.selectedJenis} onChange={val => setFormData({ ...formData, selectedJenis: val })} />
@@ -111,12 +108,12 @@ const FormTaskDialog = ({ mode, initialData, onSave, onClose, onDelete }) => {
 
          {/* Tombol Aksi */}
          <div className="mt-10 flex flex-col gap-3">
-            <button onClick={handleSubmit} className="w-full rounded-[12px] bg-[#2D3E50] py-3 text-xl font-bold tracking-widest text-white shadow-md transition-all hover:bg-[#1f2c3a] active:scale-95">
+            <button onClick={handleSubmit} className="bg-primary text-accent w-full cursor-pointer rounded-md py-3 text-xl font-semibold tracking-widest shadow-md transition-all hover:-translate-y-1 active:scale-95">
                {mode === "ADD" ? "Simpan" : "Simpan Perubahan"}
             </button>
 
             {mode === "EDIT" && (
-               <button onClick={() => onDelete(initialData.id)} className="w-full py-2 text-sm font-semibold text-red-200 transition-colors hover:text-white">
+               <button onClick={() => onDelete(initialData.id)} className="w-full py-2 text-lg outline-2 outline-red-900 font-semibold rounded-md text-red-900 cursor-pointer transition-colors hover:text-accent hover:bg-red-900">
                   Hapus Tugas
                </button>
             )}
@@ -133,7 +130,7 @@ const InputGroup = ({ label, value, onChange, type = "text", placeholder = "" })
          value={value}
          onChange={onChange}
          placeholder={placeholder}
-         className="w-[180px] rounded-[10px] border-none bg-[#CDD7D6] px-3 py-1.5 text-center text-sm font-semibold text-[#2D3E50] shadow-inner outline-none placeholder:text-slate-500"
+         className="w-[180px] rounded-[10px] border-none bg-background px-3 py-1.5 text-center text-sm font-semibold text-[#2D3E50] shadow-inner outline-none placeholder:text-slate-500"
       />
    </div>
 );
@@ -142,7 +139,7 @@ const DropdownRow = ({ label, options, value, onChange }) => (
    <div className="flex items-center justify-between">
       <label className="text-lg font-medium">{label}</label>
       <div className="relative">
-         <select value={value} onChange={e => onChange(e.target.value)} className="w-[180px] cursor-pointer appearance-none rounded-[10px] bg-[#CDD7D6] px-3 py-1.5 pr-8 text-left text-sm font-semibold text-[#2D3E50] shadow-inner outline-none">
+         <select value={value} onChange={e => onChange(e.target.value)} className="w-[180px] cursor-pointer appearance-none rounded-[10px] bg-background px-3 py-1.5 pr-8 text-left text-sm font-semibold text-primary shadow-inner outline-none">
             <option value="">Pilih...</option>
             {options.map(opt => (
                <option key={opt.id} value={opt.id}>
@@ -151,7 +148,7 @@ const DropdownRow = ({ label, options, value, onChange }) => (
             ))}
          </select>
          <div className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2">
-            <ChevronDown size={18} className="text-[#2D3E50]" />
+            <ChevronDown size={18} className="text-primary" />
          </div>
       </div>
    </div>

@@ -13,6 +13,7 @@ export default function ProfilePage() {
    const [dialogInputName, setDialogInputName] = useState("");
    const [dialogInputUsername, setDialogInputUsername] = useState("");
    const [error, setError] = useState("")
+   
 
    useEffect(() => {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"))
@@ -98,7 +99,7 @@ export default function ProfilePage() {
             </div>
             <div className="flex flex-col gap-1.5">
                <h1 className="text-2xl font-semibold">Username</h1>
-               <h2 className="text-primary text-xl">{userInfo.username || "-"}</h2>
+               <h2 className="text-primary text-xl">@{userInfo.username || "-"}</h2>
             </div>
 
             <div className="flex justify-end">

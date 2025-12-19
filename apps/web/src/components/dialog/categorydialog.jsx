@@ -15,8 +15,8 @@ export default function AddCategoryDialog({ isOpen, title, inputValue, setInputV
                <div className="flex items-center justify-between">
                   <div className="w-fit">
                      {isEditMode && (
-                        <button onClick={onDelete} className="cursor-pointer text-red-900">
-                           <Trash />
+                        <button onClick={onDelete} className="group cursor-pointer text-red-900">
+                           <Trash className="transition-colors group-hover:fill-red-900" />
                         </button>
                      )}
                   </div>
